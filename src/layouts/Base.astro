@@ -26,7 +26,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <meta name="color-scheme" content="dark" />
     <meta name="theme-color" content="#000000" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/favicon-180.png" />
     <link rel="canonical" href={canonical.href} />
 
     <meta property="og:type" content="website" />
@@ -58,9 +59,18 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <a
           href="/"
           aria-current={path === "/" ? "page" : undefined}
-          class="font-mono text-sm font-medium tracking-tight text-text"
+          class="flex items-center gap-1"
         >
-          {shell.user}<span class="text-bid">@</span>{shell.host}
+          <img
+            src="/singu-wordmark.png"
+            alt={shell.user}
+            width="950"
+            height="194"
+            class="pixelated h-[13px] w-auto"
+          />
+          <span class="font-mono text-sm font-medium tracking-tight text-text">
+            <span class="text-bid">@</span>{shell.host}
+          </span>
         </a>
 
         <nav aria-label="Sections">

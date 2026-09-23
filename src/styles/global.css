@@ -23,6 +23,11 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* The wordmark is pixel art, so never let the browser smooth it. */
+.pixelated {
+  image-rendering: pixelated;
+}
+
 /* Numerals in the proof ledger must line up like a price column. */
 .tabular {
   font-variant-numeric: tabular-nums;
