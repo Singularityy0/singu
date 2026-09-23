@@ -98,7 +98,7 @@ export const builds: ReadonlyArray<Build> = [
     stack: ["solidity", "foundry", "rust", "alloy", "next.js", "viem", "supra pull v2"],
     award: "Honourable mention, Monad Blitz Delhi v4",
     links: [
-      { label: "live", href: "https://schmeckles.vercel.app/" },
+      { label: "live", href: "https://schmeckles.singu.online/" },
       { label: "source", href: "https://github.com/Singularityy0/schleem" },
     ],
     featured: true,
