@@ -4,6 +4,7 @@ node_modules/
 # build output
 dist/
 .astro/
+singu-dist.zip
 
 # source documents, not part of the site
 *.pdf
