@@ -1,0 +1,21 @@
+---
+import { shell } from "../data/profile";
+
+interface Props {
+  /** The command shown as if it were typed at this prompt. */
+  command: string;
+  /** Renders the blinking block cursor after the command. */
+  cursor?: boolean;
+}
+
+const { command, cursor = false } = Astro.props;
+---
+
+<p class="font-mono text-sm leading-none sm:text-[0.9375rem]">
+  <span class="text-dim">{shell.user}@{shell.host}</span><span class="text-dim/60">:</span><span
+    class="text-dim">{shell.cwd}</span
+  ><span class="text-bid">$</span>
+  <span class="text-text">{command}</span>{
+    cursor && <span class="cursor ml-px inline-block h-[1em] w-[0.6em] translate-y-[0.15em] bg-bid" />
+  }
+</p>

@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  /* Ground: a real terminal is black. Panels sit above it in blue-black. */
+  --color-ink: #000000;
+  --color-panel: #0a1117;
+  --color-rule: #16222b;
+  --color-text: #d8dee3;
+  --color-dim: #6b7a85;
+
+  /* Two accents, semantics borrowed from an order book. */
+  --color-bid: #4cc9a7;
+  --color-ask: #e8913c;
+
+  /* Native stack: real Helvetica on macOS/iOS, metrically identical Arial elsewhere, 0 KB. */
+  --font-sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html {
+  background-color: var(--color-ink);
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Numerals in the proof ledger must line up like a price column. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* The single piece of unprompted motion on the page. */
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.cursor {
+  animation: blink 1.06s steps(1, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor { animation: none; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-bid);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-bid);
+  color: var(--color-ink);
+}

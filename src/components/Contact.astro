@@ -1,0 +1,34 @@
+---
+import Prompt from "./Prompt.astro";
+import { contact } from "../data/profile";
+---
+
+<!-- Bookends the hero's proof ledger: same dotted-leader idiom, different content. -->
+<section id="contact" class="mx-auto max-w-5xl px-5 pt-16 pb-16 sm:px-8 sm:pt-24 sm:pb-20">
+  <Prompt command="cat contact" />
+
+  <ul class="mt-7 max-w-2xl space-y-[0.6rem]">
+    {
+      contact.map((row) => (
+        <li class="flex items-baseline gap-3 font-mono text-[0.8125rem] sm:text-sm">
+          <span class="shrink-0 text-dim">{row.channel}</span>
+          <span class="min-w-6 flex-1 translate-y-[-0.3em] border-b border-dotted border-rule" />
+          {
+            row.href ? (
+              <a
+                href={row.href}
+                rel="noopener noreferrer"
+                class="shrink-0 text-bid transition-colors hover:text-text"
+              >
+                {row.handle}
+              </a>
+            ) : (
+              <span class="shrink-0 text-text">{row.handle}</span>
+            )
+          }
+        </li>
+      ))
+    }
+  </ul>
+
+</section>

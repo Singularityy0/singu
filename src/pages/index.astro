@@ -1,0 +1,12 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import { identity, focus } from "../data/profile";
+---
+
+<Base
+  title={`${identity.handle} / ${identity.legalName}`}
+  description={`${focus.headline} Market microstructure, concentrated liquidity and low-latency systems in Rust.`}
+>
+  <Hero />
+</Base>

@@ -1,0 +1,38 @@
+---
+import Prompt from "./Prompt.astro";
+import { humanIntro, humanBlocks, humanCoda, humanPhoto } from "../data/profile";
+---
+
+<section id="human" class="mx-auto max-w-5xl px-5 pt-16 pb-16 sm:px-8 sm:pt-24 sm:pb-20">
+  <Prompt command="cat human.md" />
+
+  <p class="mt-7 font-mono text-[0.8125rem] text-dim sm:text-sm">{humanIntro}</p>
+
+  <div class="mt-12 space-y-11">
+    {
+      humanBlocks.map((block) => (
+        <article>
+          <h2 class="font-mono text-xs font-medium text-bid">{block.key}</h2>
+          <p class="mt-2.5 max-w-[62ch] text-[1.0625rem] leading-[1.65] text-text/85">{block.body}</p>
+        </article>
+      ))
+    }
+  </div>
+
+  <p class="mt-14 max-w-[62ch] font-mono text-xs text-dim">{humanCoda}</p>
+
+  <figure class="mt-10">
+    <img
+      src={humanPhoto.src}
+      width={humanPhoto.width}
+      height={humanPhoto.height}
+      alt={humanPhoto.alt}
+      loading="lazy"
+      decoding="async"
+      class="w-full max-w-[240px] border border-rule"
+    />
+    <figcaption class="mt-3 max-w-[40ch] font-mono text-xs leading-relaxed text-dim">
+      {humanPhoto.caption}
+    </figcaption>
+  </figure>
+</section>

@@ -1,0 +1,59 @@
+---
+import Prompt from "./Prompt.astro";
+import { identity, facts, focus, proof } from "../data/profile";
+---
+
+<section class="mx-auto max-w-5xl px-5 pt-16 pb-16 sm:px-8 sm:pt-24 sm:pb-20">
+  <!-- whoami -->
+  <Prompt command="whoami" />
+
+  <div class="mt-7">
+    <h1 class="font-mono text-[clamp(3.25rem,15vw,8.5rem)] leading-[0.82] font-semibold tracking-[-0.06em]">
+      {identity.handle}
+    </h1>
+
+    <dl class="mt-8 grid max-w-md grid-cols-[5.5rem_1fr] gap-x-5 gap-y-[0.4rem] font-mono text-[0.8125rem] sm:text-sm">
+      {
+        facts.map((fact) => (
+          <Fragment>
+            <dt class="text-dim">{fact.key}</dt>
+            <dd class="text-text">{fact.value}</dd>
+          </Fragment>
+        ))
+      }
+    </dl>
+  </div>
+
+  <!-- focus -->
+  <div class="mt-16">
+    <Prompt command="cat focus.md" />
+
+    <h2 class="mt-7 max-w-[24ch] text-[clamp(1.75rem,5vw,2.75rem)] leading-[1.08] font-medium tracking-[-0.02em]">
+      {focus.headline}
+    </h2>
+
+    <p class="mt-5 max-w-[66ch] text-[1.0625rem] leading-[1.65] text-text/80">
+      {focus.body}
+    </p>
+  </div>
+
+  <!-- proof ledger -->
+  <div class="mt-16">
+    <Prompt command="./proof --list" />
+
+    <ul class="mt-7 max-w-2xl space-y-[0.6rem]">
+      {
+        proof.map((row) => (
+          <li class="flex items-baseline gap-3 font-mono text-[0.8125rem] sm:text-sm">
+            <span class="shrink-0 text-text">{row.label}</span>
+            <span class="min-w-6 flex-1 translate-y-[-0.3em] border-b border-dotted border-rule" />
+            <span class:list={["tabular shrink-0", row.side === "bid" ? "text-bid" : "text-ask"]}>
+              {row.value}
+            </span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+</section>
