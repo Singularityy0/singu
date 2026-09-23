@@ -15,7 +15,7 @@ export const identity = {
   age: 20,
   born: "2006-08-14",
   program: "B.S. Economics",
-  school: "IIT Kanpur",
+  university: "IIT Kanpur",
   year: "3rd year",
   role: "Technical Lead, Programming Club",
 } as const;
@@ -25,8 +25,8 @@ export const facts: ReadonlyArray<{ key: string; value: string }> = [
   { key: "name", value: "Anany Rai" },
   { key: "age", value: "20" },
   { key: "school", value: "IIT Kanpur" },
-  { key: "reading", value: "Economics, 3rd year" },
-  { key: "writing", value: "Rust, C/C++, Zig" },
+  { key: "major", value: "Economics, 3rd year" },
+  { key: "programming", value: "Rust, Python, Zig" },
   { key: "role", value: "Technical Lead, Programming Club" },
 ];
 
