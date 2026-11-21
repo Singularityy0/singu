@@ -187,12 +187,11 @@ export type TimelineEntry = {
 export const timeline: ReadonlyArray<TimelineEntry> = [
   {
     when: "3 to 6 nov 2026",
-    title: "co-organizing the prediction markets community hub",
+    title: "co-organized the prediction markets community hub",
     where: "devcon 8, mumbai",
     body:
       "a community hub on market design, liquidity, resolution, futarchy and governance, with sessions " +
-      "extending into the cryptographic privacy mechanisms those markets need to work at scale.",
-    upcoming: true,
+      "that went into the cryptographic privacy stuff those markets need to work at scale.",
     links: [
       { label: "forum thread", href: "https://forum.devcon.org/t/prediction-markets-community-hub/8824" },
     ],
