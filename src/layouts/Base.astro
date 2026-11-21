@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { contact } from "../data/profile";
 
 interface Props {
   title: string;
@@ -13,6 +14,36 @@ const { title, description, backLink = true } = Astro.props;
 const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
 const canonical = new URL(path, Astro.site);
 const updated = new Date().toISOString().slice(0, 10);
+
+/** goatcounter site code: stats live at https://<code>.goatcounter.com */
+const goat = "singu";
+
+/** tells google who this site is about: anany rai, aka singu, at iit kanpur */
+const person = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${Astro.site}#website`,
+      url: Astro.site?.href,
+      name: "singu",
+      alternateName: ["Anany Rai", "singu.online"],
+    },
+    {
+      "@type": "Person",
+      "@id": `${Astro.site}#me`,
+      name: "Anany Rai",
+      alternateName: "singu",
+      url: Astro.site?.href,
+      image: new URL("/singu.webp", Astro.site).href,
+      jobTitle: "Technical Lead, Programming Club, IIT Kanpur",
+      description: "Economics student at IIT Kanpur building DeFi and prediction market protocols in Rust.",
+      affiliation: { "@type": "CollegeOrUniversity", name: "Indian Institute of Technology Kanpur", alternateName: "IIT Kanpur" },
+      alumniOf: { "@type": "CollegeOrUniversity", name: "Indian Institute of Technology Kanpur", alternateName: "IIT Kanpur" },
+      sameAs: contact.filter((c) => c.href?.startsWith("http")).map((c) => c.href),
+    },
+  ],
+};
 ---
 
 <!doctype html>
@@ -28,11 +59,21 @@ const updated = new Date().toISOString().slice(0, 10);
     <link rel="canonical" href={canonical.href} />
     <link rel="alternate" type="application/rss+xml" title="singu's blog" href="/rss.xml" />
 
+    <link rel="sitemap" href="/sitemap.xml" />
+    {path === "/" && <script type="application/ld+json" set:html={JSON.stringify(person)} />}
+
+    <meta property="og:site_name" content="singu" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
     <meta name="twitter:card" content="summary" />
+
+    <script
+      is:inline
+      data-goatcounter={`https://${goat}.goatcounter.com/count`}
+      async
+      src="https://gc.zgo.at/count.js"></script>
 
     <script is:inline>
       try {
@@ -49,8 +90,19 @@ const updated = new Date().toISOString().slice(0, 10);
     <hr />
     <p class="small">
       made by hand (mostly). last updated {updated}.
+      <span id="visits"></span>
       <a href="#" id="lights">lights off</a>
     </p>
+
+    <!-- old school hit counter. stays empty if goatcounter can't be reached -->
+    <script is:inline define:vars={{ goat }}>
+      fetch("https://" + goat + ".goatcounter.com/counter/TOTAL.json")
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) {
+          if (d && d.count) document.getElementById("visits").textContent = String(d.count).trim() + " visitors so far.";
+        })
+        .catch(function () {});
+    </script>
 
     <script is:inline>
       (function () {
