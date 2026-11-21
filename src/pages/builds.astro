@@ -1,12 +1,39 @@
 ---
 import Base from "../layouts/Base.astro";
-import Builds from "../components/Builds.astro";
+import { builds } from "../data/profile";
 ---
 
 <Base
-  heading="Core builds"
   title="builds / singu"
-  description="A capped-call options market on Monad, an agentic coding IDE tuned for small open-weight models, a Solana CLMM with Q64.96 arithmetic, and three more."
+  description="flurbo, a combinatorial prediction market on monad, plus capped-call options, an agentic coding ide on small models, a solana clmm and more."
 >
-  <Builds />
+  <h1>builds</h1>
+  <p>stuff i've built. mostly defi, mostly rust, newest obsession first.</p>
+
+  <ul>
+    {builds.map((b) => <li><a href={`#${b.slug}`}>{b.name}</a></li>)}
+  </ul>
+
+  {
+    builds.map((b) => (
+      <>
+        <hr />
+        <h2 id={b.slug}>{b.name}</h2>
+        <p><i>{b.tagline}</i></p>
+        <p>{b.body}</p>
+        {b.award && <p><b>won:</b> {b.award}</p>}
+        {b.status && <p><b>status:</b> {b.status}</p>}
+        {b.role && <p><b>my role:</b> {b.role}</p>}
+        <p class="small">stack: {b.stack.join(", ")}</p>
+        <p>
+          {b.links?.map((l) => (
+            <>
+              [<a href={l.href} rel="noopener noreferrer">{l.label}</a>]{" "}
+            </>
+          ))}
+          {b.closedSource && <span class="small">(closed source)</span>}
+        </p>
+      </>
+    ))
+  }
 </Base>

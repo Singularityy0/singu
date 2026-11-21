@@ -1,12 +1,19 @@
 ---
 import Base from "../layouts/Base.astro";
-import Contact from "../components/Contact.astro";
+import { contact } from "../data/profile";
 ---
 
-<Base
-  heading="Contact"
-  title="contact / singu"
-  description="GitHub, X, Instagram, Discord and email for Anany Rai."
->
-  <Contact />
+<Base title="contact / singu" description="github, x, instagram, discord and email for anany rai.">
+  <h1>contact</h1>
+  <p>dms are open. email if it's serious.</p>
+
+  <ul>
+    {
+      contact.map((row) => (
+        <li>
+          {row.channel}: {row.href ? <a href={row.href} rel="noopener noreferrer">{row.handle}</a> : row.handle}
+        </li>
+      ))
+    }
+  </ul>
 </Base>

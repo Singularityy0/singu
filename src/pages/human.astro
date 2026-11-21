@@ -1,12 +1,23 @@
 ---
 import Base from "../layouts/Base.astro";
-import Human from "../components/Human.astro";
+import { humanIntro, humanBlocks, humanCoda } from "../data/profile";
 ---
 
 <Base
-  heading="The human layer"
   title="human / singu"
-  description="Rick and Morty, Invincible, Undertale, Tolkien's legendarium, The Strokes, lawn tennis, and once genuinely planning to be a dinosaur."
+  description="rick and morty, invincible, undertale, tolkien's legendarium, the strokes, lawn tennis, and once genuinely planning to be a dinosaur."
 >
-  <Human />
+  <h1>the human part</h1>
+  <p><i>{humanIntro}</i></p>
+
+  {
+    humanBlocks.map((block) => (
+      <>
+        <h2>{block.key}</h2>
+        <p>{block.body}</p>
+      </>
+    ))
+  }
+
+  <p>{humanCoda}</p>
 </Base>

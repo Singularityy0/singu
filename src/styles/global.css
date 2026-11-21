@@ -1,61 +1,60 @@
-@import "tailwindcss";
-
-@theme {
-  /* Ground: a real terminal is black. Panels sit above it in blue-black. */
-  --color-ink: #000000;
-  --color-panel: #0a1117;
-  --color-rule: #16222b;
-  --color-text: #d8dee3;
-  --color-dim: #6b7a85;
-
-  /* Two accents, semantics borrowed from an order book. */
-  --color-bid: #4cc9a7;
-  --color-ask: #e8913c;
-
-  /* Native stack: real Helvetica on macOS/iOS, metrically identical Arial elsewhere, 0 KB. */
-  --font-sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-}
+/*
+  deliberately almost nothing in here.
+  the browser already knows how to draw a web page.
+*/
 
 html {
-  background-color: var(--color-ink);
-  color-scheme: dark;
-  -webkit-text-size-adjust: 100%;
+  background: #fff;
+  color: #000;
+  color-scheme: light;
 }
 
-/* The wordmark is pixel art, so never let the browser smooth it. */
-.pixelated {
+body {
+  margin: 8px auto 40px 8px;
+  max-width: 46em;
+  padding: 0 8px;
+  line-height: 1.4;
+  overflow-wrap: break-word;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* the wordmark is white pixel art, so it lives on a black box */
+.wordmark {
+  display: inline-block;
+  background: #000;
+  padding: 12px 16px;
+  line-height: 0;
+}
+
+.wordmark img {
+  height: 36px;
+  width: auto;
   image-rendering: pixelated;
 }
 
-/* Numerals in the proof ledger must line up like a price column. */
-.tabular {
-  font-variant-numeric: tabular-nums;
+.small {
+  font-size: small;
 }
 
-/* The single piece of unprompted motion on the page. */
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+/* lights off */
+html[data-theme="dark"] {
+  background: #111;
+  color: #ddd;
+  color-scheme: dark;
 }
 
-.cursor {
-  animation: blink 1.06s steps(1, end) infinite;
+html[data-theme="dark"] a {
+  color: #8ab4ff;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .cursor { animation: none; }
-  *, *::before, *::after {
-    transition-duration: 0.01ms !important;
-  }
+html[data-theme="dark"] a:visited {
+  color: #c39bff;
 }
 
-:focus-visible {
-  outline: 2px solid var(--color-bid);
-  outline-offset: 3px;
-}
-
-::selection {
-  background: var(--color-bid);
-  color: var(--color-ink);
+html[data-theme="dark"] .wordmark {
+  outline: 1px solid #444;
 }

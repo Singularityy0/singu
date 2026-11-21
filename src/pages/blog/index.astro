@@ -1,0 +1,26 @@
+---
+import Base from "../../layouts/Base.astro";
+import { getPosts, ymd } from "../../data/posts";
+
+const posts = await getPosts();
+---
+
+<Base title="blog / singu" description="singu's blog. defi, rust, math, and whatever else.">
+  <h1>blog</h1>
+  <p>things i felt like writing down. newest first. there's an <a href="/rss.xml">rss feed</a> too.</p>
+
+  {
+    posts.length === 0 ? (
+      <p>nothing here yet.</p>
+    ) : (
+      <ul>
+        {posts.map((post) => (
+          <li>
+            {ymd(post.data.date)} &mdash; <a href={`/blog/${post.id}`}>{post.data.title}</a>
+            {post.data.draft && <i> (draft)</i>}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</Base>

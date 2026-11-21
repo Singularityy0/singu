@@ -1,12 +1,57 @@
 ---
 import Base from "../layouts/Base.astro";
-import Hero from "../components/Hero.astro";
-import { identity, focus } from "../data/profile";
+import { identity, focus, humanPhoto } from "../data/profile";
+import { getPosts, ymd } from "../data/posts";
+
+const latest = (await getPosts()).slice(0, 3);
 ---
 
 <Base
   title={`${identity.handle} / ${identity.legalName}`}
-  description={`${focus.headline} Market microstructure, concentrated liquidity and low-latency systems in Rust.`}
+  description="anany rai, aka singu. defi, tradfi, and information markets."
+  backLink={false}
 >
-  <Hero />
+  <h1>
+    <span class="wordmark">
+      <img src="/singu-wordmark.png" alt={identity.handle} width="950" height="194" />
+    </span>
+  </h1>
+
+  <h2>{focus.headline}</h2>
+
+  <p>
+    hi, i'm anany rai, most people call me singu. 20, third year of economics at iit kanpur,
+    technical lead at the programming club. i write rust, python and zig.
+  </p>
+
+  <p>{focus.body}</p>
+
+  <p>things i've built: <a href="/builds">builds</a></p>
+  <p>what i've been up to: <a href="/proof">proof of work</a></p>
+  <p>the human part (dinosaurs, plushies, music): <a href="/human">about me</a></p>
+  <p>i write stuff sometimes: <a href="/blog">blog</a></p>
+  <p>say hi: <a href="/contact">contact</a></p>
+
+  {
+    latest.length > 0 && (
+      <>
+        <h3>latest posts</h3>
+        <ul>
+          {latest.map((post) => (
+            <li>
+              {ymd(post.data.date)} &mdash; <a href={`/blog/${post.id}`}>{post.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </>
+    )
+  }
+
+  <p>
+    <a href="/human">
+      <img src={humanPhoto.src} width="300" height="496" alt={humanPhoto.alt} />
+    </a>
+    <br />
+    <span class="small">{humanPhoto.caption} <a href="/human">the story</a>.</span>
+  </p>
 </Base>
